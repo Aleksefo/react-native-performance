@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
+import {createStackNavigator, StackScreenProps} from '@react-navigation/stack'
+import React from 'react'
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,29 +15,43 @@ import {
   View,
   Text,
   StatusBar,
-} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+  Button,
+} from 'react-native'
+import {NavigationContainer} from '@react-navigation/native'
 
-const Stack = createStackNavigator();
+type RootStackParamList = {
+  Home: undefined
+  Profile: {userId: string}
+  Feed: {sort: 'latest' | 'top'} | undefined
+  Details: undefined
+}
 
-const HomeScreen = () => (
+const Stack = createStackNavigator<RootStackParamList>()
+
+type ProfileScreenNavigationProp = StackScreenProps<RootStackParamList, 'Home'>
+
+const HomeScreen = ({navigation}: ProfileScreenNavigationProp) => (
   <SafeAreaView style={{flex: 1}}>
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
       style={styles.scrollView}>
-      <View style={{backgroundColor: 'pink', flex: 1}}>
-        <Text>Hi</Text>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Text>Home Screen</Text>
+        <Button
+          title="Go to Details"
+          onPress={() => navigation.navigate('Details')}
+        />
       </View>
     </ScrollView>
   </SafeAreaView>
-);
+)
 
 function DetailsScreen() {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>Details Screen</Text>
     </View>
-  );
+  )
 }
 
 const App = () => {
@@ -49,13 +63,13 @@ const App = () => {
       </Stack.Navigator>
       <StatusBar barStyle="dark-content" />
     </NavigationContainer>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-});
+})
 
-export default App;
+export default App
