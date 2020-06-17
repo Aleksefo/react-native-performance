@@ -1,12 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import {createStackNavigator, StackScreenProps} from '@react-navigation/stack'
 import React from 'react'
 import {
   SafeAreaView,
@@ -18,33 +9,23 @@ import {
   Button,
 } from 'react-native'
 import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator, StackScreenProps} from '@react-navigation/stack'
+import {createDrawerNavigator} from '@react-navigation/drawer'
+import HomeScreen from '../screens/HomeScreen'
+import ListScreen from '../screens/ListScreen'
 
 type RootStackParamList = {
   Home: undefined
   Profile: {userId: string}
   Feed: {sort: 'latest' | 'top'} | undefined
   Details: undefined
+  List: undefined
 }
 
 const Stack = createStackNavigator<RootStackParamList>()
+const Drawer = createDrawerNavigator()
 
 type ProfileScreenNavigationProp = StackScreenProps<RootStackParamList, 'Home'>
-
-const HomeScreen = ({navigation}: ProfileScreenNavigationProp) => (
-  <SafeAreaView style={{flex: 1}}>
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      style={styles.scrollView}>
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => navigation.navigate('Details')}
-        />
-      </View>
-    </ScrollView>
-  </SafeAreaView>
-)
 
 function DetailsScreen() {
   return (
@@ -57,10 +38,13 @@ function DetailsScreen() {
 const RootStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={HomeScreen} />
+
+        <Drawer.Screen name="List" component={ListScreen} />
+
+        <Drawer.Screen name="Details" component={DetailsScreen} />
+      </Drawer.Navigator>
       <StatusBar barStyle="dark-content" />
     </NavigationContainer>
   )
