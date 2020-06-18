@@ -1,8 +1,8 @@
 import React from 'react'
-import RootStack from './src/navigation/RootStack'
+import RootStackNavigator from './src/navigation/RootStack'
 
 const App = () => {
-  return <RootStack />
+  return <RootStackNavigator />
 }
 
 export default App
