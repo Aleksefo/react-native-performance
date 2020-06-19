@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   FlatList,
   SafeAreaView,
+  View,
 } from 'react-native'
 import APIKeys from '../values/APIKeys'
 import Colors from '../values/Colors'
@@ -51,7 +52,7 @@ const MovieListScreen = () => {
   // }
 
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
         backgroundColor: 'black',
@@ -74,7 +75,7 @@ const MovieListScreen = () => {
           renderItem={({item}) => <GridListItem movieDataItem={item} />}
         />
       )}
-    </SafeAreaView>
+    </View>
   )
 }
 
