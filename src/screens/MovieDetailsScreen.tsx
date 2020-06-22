@@ -6,12 +6,12 @@ import {
   StyleSheet,
   ImageBackground,
   Image,
-  Dimensions,
 } from 'react-native'
 import {RouteProp} from '@react-navigation/native'
 import Spacing from '../components/Spacing'
 import {RootStackParamList} from '../navigation/RootStack'
 import Colors from '../values/Colors'
+import Config from '../values/Config'
 import Strings from '../values/Strings'
 import Theme from '../values/Theme'
 
@@ -27,8 +27,9 @@ const MovieDetailsScreen = ({route}: Props) => {
     <SafeAreaView>
       <ImageBackground
         source={{
-          uri: `http://image.tmdb.org/t/p/w500${movieDataItem.backdrop_path}`,
+          uri: `${Config.movieDBImage}${movieDataItem.backdrop_path}`,
         }}
+        //todo add default placeholders
         // defaultSource={IMAGES.default}
         style={styles.backdrop}>
         <View style={styles.backgroundContainer}>
@@ -39,7 +40,7 @@ const MovieDetailsScreen = ({route}: Props) => {
         <View style={styles.detailsContainer}>
           <Image
             source={{
-              uri: `http://image.tmdb.org/t/p/w500${movieDataItem.poster_path}`,
+              uri: `${Config.movieDBImage}${movieDataItem.poster_path}`,
             }}
             // defaultSource={IMAGES.default}
             style={styles.poster}
@@ -61,7 +62,7 @@ const MovieDetailsScreen = ({route}: Props) => {
         </View>
         <Spacing size="m" />
         <Text style={styles.details}>{Strings.overview}</Text>
-        <Spacing size="m" />
+        <Spacing size="s" />
         <Text style={styles.description}>{movieDataItem.overview}</Text>
         <Spacing size="m" />
         <Text style={styles.details}>{Strings.trailers}</Text>
@@ -75,13 +76,13 @@ const styles = StyleSheet.create({
     marginHorizontal: Theme.sizeM,
   },
   backdrop: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').width / 1.78,
+    width: Theme.w,
+    height: Theme.w / 1.78,
   },
   poster: {
-    width: Dimensions.get('window').width / 3.5,
-    height: (Dimensions.get('window').width / 3.5) * 1.5,
-    marginTop: -((Dimensions.get('window').width / 3.5) * 1.5) / 2,
+    width: Theme.w / 3.5,
+    height: (Theme.w / 3.5) * 1.5,
+    marginTop: -((Theme.w / 3.5) * 1.5) / 2,
     borderWidth: 2,
     borderColor: Colors.white,
     marginRight: Theme.sizeM,
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     flexDirection: 'row',
-    height: ((Dimensions.get('window').width / 3.5) * 1.5) / 2,
+    height: ((Theme.w / 3.5) * 1.5) / 2,
     alignItems: 'flex-end',
   },
   details: {

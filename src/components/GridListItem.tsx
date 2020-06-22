@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native'
 import React from 'react'
 import {Dimensions, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import {IMovieData} from '../screens/MovieListScreen'
+import Config from '../values/Config'
 // import {hitSlop, numColumns, ss, styled, wid} from '../values/styles'
 
 type Props = {
@@ -16,7 +17,7 @@ const GridListItem = ({movieDataItem}: Props) => {
       onPress={() => navigation.navigate('MovieDetails', {movieDataItem})}>
       <Image
         source={{
-          uri: `http://image.tmdb.org/t/p/w500${movieDataItem.poster_path}`,
+          uri: `${Config.movieDBImage}${movieDataItem.poster_path}`,
         }}
         // defaultSource={IMAGES.default}
         style={styles.imageStyle}
