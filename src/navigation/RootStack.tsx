@@ -65,7 +65,7 @@ const MainStackNavigator = ({navigation, style}: MainStackNavigatorProps) => {
       <MainStack.Navigator
         screenOptions={{
           headerTransparent: true,
-          headerStyle: {backgroundColor: 'transparent'},
+          headerStyle: {backgroundColor: 'transparent', height: 100},
           // headerTitle: null,
           headerLeft: () => (
             <Icon
@@ -78,19 +78,23 @@ const MainStackNavigator = ({navigation, style}: MainStackNavigatorProps) => {
           ),
           headerBackground: () => (
             <LinearGradient
-              colors={['transparent', 'rgba(0,0,0,0.7)', 'black']}
+              colors={['transparent', 'black', 'black']}
               style={styles.headerBackground}
               start={{x: 0, y: 1}}
               end={{x: 0, y: 0}}
             />
           ),
-          headerTitleStyle: {color: '#fff'},
+          headerTitleStyle: {
+            color: '#fff',
+            marginTop: Theme.sizeS,
+            ...Theme.fonts.bodyLarge,
+          },
         }}>
         <MainStack.Screen name="Home" component={HomeScreen} />
         <MainStack.Screen
           name="MovieList"
           component={MovieListScreen}
-          options={{title: Strings.movieListScreen}}
+          options={{title: Strings.movieListScreen.toUpperCase()}}
         />
         <MainStack.Screen
           name="MovieDetails"
