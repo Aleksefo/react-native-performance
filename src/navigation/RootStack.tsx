@@ -13,6 +13,7 @@ import HomeScreen from '../screens/HomeScreen'
 import MovieListScreen, {IMovieData} from '../screens/MovieListScreen'
 import MovieDetailsScreen from '../screens/MovieDetailsScreen'
 import Strings from '../values/Strings'
+import LinearGradient from 'react-native-linear-gradient'
 
 export type RootStackParamList = {
   Home: undefined
@@ -96,12 +97,13 @@ const RootStackNavigator = () => {
 
   return (
     <NavigationContainer>
-      <View style={{flex: 1}}>
+      <LinearGradient
+        colors={['#4c669f', '#3b5998', '#192f6a']}
+        style={{flex: 1}}>
         <Drawer.Navigator
           drawerType="slide"
           overlayColor="transparent"
           drawerStyle={styles.drawerStyles}
-          contentContainerStyle={{flex: 1}}
           drawerContent={(props) => {
             setProgress(props.progress)
             return <CustomDrawerContent {...props} />
@@ -118,7 +120,7 @@ const RootStackNavigator = () => {
             )}
           </Drawer.Screen>
         </Drawer.Navigator>
-      </View>
+      </LinearGradient>
       <StatusBar barStyle="dark-content" />
     </NavigationContainer>
   )
