@@ -14,6 +14,8 @@ import MovieListScreen, {IMovieData} from '../screens/MovieListScreen'
 import MovieDetailsScreen from '../screens/MovieDetailsScreen'
 import Strings from '../values/Strings'
 import LinearGradient from 'react-native-linear-gradient'
+import Icon from 'react-native-vector-icons/Ionicons'
+import Theme from '../values/Theme'
 
 export type RootStackParamList = {
   Home: undefined
@@ -60,9 +62,16 @@ const MovieStackNavigator = ({navigation, style}) => {
       <MovieStack.Navigator
         screenOptions={{
           headerTransparent: true,
-          headerTitle: null,
+          headerStyle: {backgroundColor: 'transparent'},
+          // headerTitle: null,
           headerLeft: () => (
-            <Button title={'menu'} onPress={() => navigation.toggleDrawer()} />
+            <Icon
+              name="md-menu"
+              size={30}
+              color="white"
+              onPress={() => navigation.toggleDrawer()}
+              style={{marginLeft: Theme.sizeM, marginTop: Theme.sizeS}}
+            />
           ),
         }}>
         <MovieStack.Screen name="Home" component={HomeScreen} />
@@ -75,7 +84,19 @@ const MovieStackNavigator = ({navigation, style}) => {
         <MovieStack.Screen
           name="MovieDetails"
           component={MovieDetailsScreen}
-          options={{title: Strings.movieDetailsScreen}}
+          options={{
+            title: Strings.movieDetailsScreen,
+            headerTitle: '',
+            headerLeft: () => (
+              <Icon
+                name="md-arrow-back"
+                size={30}
+                color="white"
+                onPress={() => navigation.goBack()}
+                style={{marginLeft: Theme.sizeM, marginTop: Theme.sizeS}}
+              />
+            ),
+          }}
         />
       </MovieStack.Navigator>
     </Animated.View>

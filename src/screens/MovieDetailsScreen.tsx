@@ -1,6 +1,7 @@
 import React from 'react'
 import {
   View,
+  SafeAreaView,
   Text,
   StyleSheet,
   ImageBackground,
@@ -23,7 +24,7 @@ type Props = {
 const MovieDetailsScreen = ({route}: Props) => {
   const {movieDataItem} = route.params
   return (
-    <View>
+    <SafeAreaView>
       <ImageBackground
         source={{
           uri: `http://image.tmdb.org/t/p/w500${movieDataItem.backdrop_path}`,
@@ -65,7 +66,7 @@ const MovieDetailsScreen = ({route}: Props) => {
         <Spacing size="m" />
         <Text style={styles.details}>{Strings.trailers}</Text>
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -92,8 +93,9 @@ const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
     alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)',
+    paddingLeft: Theme.sizeM,
   },
   detailsContainer: {
     flexDirection: 'row',
