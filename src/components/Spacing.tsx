@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {View} from 'react-native'
-import Theme from '../values/Theme'
+import {Theme} from '../values'
 
 /**
  * Spacing component. Example of usage:

@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text, Button, StyleSheet} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
-import Colors from '../values/Colors'
+import {Colors} from '../values'
 
 const HomeScreen = () => {
   const navigation = useNavigation()

@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {StyleSheet, ActivityIndicator, FlatList, View} from 'react-native'
-import APIKeys from '../values/APIKeys'
-import Colors from '../values/Colors'
-import Config from '../values/Config'
 import GridListItem from '../components/GridListItem'
+import {Config, Colors, APIKeys} from '../values'
 
 export interface IMovieData {
   title: string

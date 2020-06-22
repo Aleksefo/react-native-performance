@@ -10,10 +10,7 @@ import {
 import {RouteProp} from '@react-navigation/native'
 import Spacing from '../components/Spacing'
 import {RootStackParamList} from '../navigation/RootStack'
-import Colors from '../values/Colors'
-import Config from '../values/Config'
-import Strings from '../values/Strings'
-import Theme from '../values/Theme'
+import {Config, Theme, Strings, Colors} from '../values'
 
 type MovieDetailsScreenProp = RouteProp<RootStackParamList, 'MovieDetails'>
 

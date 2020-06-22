@@ -2,8 +2,7 @@ import {useNavigation} from '@react-navigation/native'
 import React from 'react'
 import {StyleSheet, TouchableOpacity, Image} from 'react-native'
 import {IMovieData} from '../screens/MovieListScreen'
-import Config from '../values/Config'
-import Theme from '../values/Theme'
+import {Config, Theme} from '../values'
 
 type Props = {
   movieDataItem: IMovieData

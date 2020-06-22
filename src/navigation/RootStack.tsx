@@ -13,11 +13,9 @@ import Animated from 'react-native-reanimated'
 import HomeScreen from '../screens/HomeScreen'
 import MovieListScreen, {IMovieData} from '../screens/MovieListScreen'
 import MovieDetailsScreen from '../screens/MovieDetailsScreen'
-import Colors from '../values/Colors'
-import Strings from '../values/Strings'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/Ionicons'
-import Theme from '../values/Theme'
+import {Theme, Strings, Colors} from '../values'
 
 export type RootStackParamList = {
   Home: undefined
