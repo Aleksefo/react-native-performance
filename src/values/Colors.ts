@@ -11,4 +11,6 @@ export default {
   background: '#ffffff',
   white: '#ffffff',
   black: '#000000',
+  blackOpaque: 'rgba(0,0,0,0.5)',
+  transparent: 'transparent',
 }

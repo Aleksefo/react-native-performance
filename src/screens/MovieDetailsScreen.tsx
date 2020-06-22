@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: Colors.blackOpaque,
     paddingLeft: Theme.sizeM,
   },
   detailsContainer: {

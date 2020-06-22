@@ -13,6 +13,7 @@ import Animated from 'react-native-reanimated'
 import HomeScreen from '../screens/HomeScreen'
 import MovieListScreen, {IMovieData} from '../screens/MovieListScreen'
 import MovieDetailsScreen from '../screens/MovieDetailsScreen'
+import Colors from '../values/Colors'
 import Strings from '../values/Strings'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -38,7 +39,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
       <Text>RN performance</Text>
       <DrawerItem
         label="Home"
-        labelStyle={{marginLeft: -16}}
+        // labelStyle={{marginLeft: -16}}
         onPress={() => props.navigation.navigate('Home')}
         // icon={}
       />
@@ -163,8 +164,8 @@ const RootStackNavigator = () => {
 const styles = StyleSheet.create({
   mainContainer: {flex: 1},
   stack: {flex: 1, overflow: 'hidden'},
-  drawerStyles: {flex: 1, width: '50%', backgroundColor: 'transparent'},
-  sceneContainerStyle: {backgroundColor: 'transparent'},
+  drawerStyles: {flex: 1, width: '50%', backgroundColor: Colors.transparent},
+  sceneContainerStyle: {backgroundColor: Colors.transparent},
   headerBackground: {flex: 1},
   logo: {height: 100, width: 100},
 })

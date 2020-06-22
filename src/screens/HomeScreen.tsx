@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, Text, Button, StyleSheet} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
+import Colors from '../values/Colors'
 
 const HomeScreen = () => {
   const navigation = useNavigation()
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'pink',
+    backgroundColor: Colors.white,
   },
 })
 
