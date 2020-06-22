@@ -10,6 +10,13 @@ const window = Dimensions.get('window')
 //   return Math.round(ratio * w)
 // }
 
+export const hitSlop = {
+  top: 14,
+  left: 14,
+  right: 14,
+  bottom: 14,
+}
+
 export const styled = {
   fontFamily: {
     fontFamily:
@@ -22,6 +29,7 @@ const Theme = {
   h: window.height,
   fonts,
   styled,
+  hitSlop,
   // For components that don't scale, like Icon, Checkbox etc
   sizeXXS: 2,
   sizeXS: 4,

@@ -1,5 +1,11 @@
 import React, {useState} from 'react'
-import {Image, Text, StatusBar, StyleSheet} from 'react-native'
+import {
+  Image,
+  Text,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import {
@@ -67,13 +73,12 @@ const MainStackNavigator = ({navigation, style}: MainStackNavigatorProps) => {
           headerStyle: {backgroundColor: 'transparent', height: 100},
           // headerTitle: null,
           headerLeft: () => (
-            <Icon
-              name="md-menu"
-              size={30}
-              color="white"
+            <TouchableOpacity
               onPress={() => navigation.toggleDrawer()}
-              style={{marginLeft: Theme.sizeM, marginTop: Theme.sizeS}}
-            />
+              hitSlop={Theme.hitSlop}
+              style={styles.iconContainer}>
+              <Icon name="md-menu" size={30} color="white" />
+            </TouchableOpacity>
           ),
           headerBackground: () => (
             <LinearGradient
@@ -102,13 +107,12 @@ const MainStackNavigator = ({navigation, style}: MainStackNavigatorProps) => {
             title: Strings.movieDetailsScreen,
             headerTitle: '',
             headerLeft: () => (
-              <Icon
-                name="md-arrow-back"
-                size={30}
-                color="white"
+              <TouchableOpacity
                 onPress={() => navigation.goBack()}
-                style={{marginLeft: Theme.sizeM, marginTop: Theme.sizeS}}
-              />
+                hitSlop={Theme.hitSlop}
+                style={styles.iconContainer}>
+                <Icon name="md-arrow-back" size={30} color="white" />
+              </TouchableOpacity>
             ),
           }}
         />
@@ -166,6 +170,7 @@ const styles = StyleSheet.create({
   sceneContainerStyle: {backgroundColor: Colors.transparent},
   headerBackground: {flex: 1},
   logo: {height: 100, width: 100},
+  iconContainer: {marginLeft: Theme.sizeM, marginTop: Theme.sizeS},
 })
 
 export default RootStackNavigator
