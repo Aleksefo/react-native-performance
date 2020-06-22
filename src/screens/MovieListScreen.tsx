@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {
-  StyleSheet,
-  ActivityIndicator,
-  FlatList,
-  SafeAreaView,
-  View,
-} from 'react-native'
+import {StyleSheet, ActivityIndicator, FlatList, View} from 'react-native'
 import APIKeys from '../values/APIKeys'
 import Colors from '../values/Colors'
 import Config from '../values/Config'

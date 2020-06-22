@@ -10,12 +10,12 @@ import {
 } from 'react-native'
 import {RouteProp} from '@react-navigation/native'
 import Spacing from '../components/Spacing'
-import {MovieStackParamList} from '../navigation/RootStack'
+import {RootStackParamList} from '../navigation/RootStack'
 import Colors from '../values/Colors'
 import Strings from '../values/Strings'
 import Theme from '../values/Theme'
 
-type MovieDetailsScreenProp = RouteProp<MovieStackParamList, 'MovieDetails'>
+type MovieDetailsScreenProp = RouteProp<RootStackParamList, 'MovieDetails'>
 
 type Props = {
   route: MovieDetailsScreenProp

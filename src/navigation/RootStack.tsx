@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
-import {Button, Image, Text, StatusBar, StyleSheet, View} from 'react-native'
+import {Image, Text, StatusBar, StyleSheet} from 'react-native'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import {
   DrawerContentScrollView,
-  DrawerItemList,
   DrawerItem,
   createDrawerNavigator,
+  DrawerNavigationProp,
+  DrawerContentComponentProps,
 } from '@react-navigation/drawer'
 import Animated from 'react-native-reanimated'
 import HomeScreen from '../screens/HomeScreen'
@@ -19,23 +20,20 @@ import Theme from '../values/Theme'
 
 export type RootStackParamList = {
   Home: undefined
-  MovieStack: MovieStackParamList
-}
-export type MovieStackParamList = {
   MovieList: undefined
   MovieDetails: {movieDataItem: IMovieData}
 }
 
-const MovieStack = createStackNavigator<MovieStackParamList>()
-const Drawer = createDrawerNavigator<RootStackParamList>()
+const MainStack = createStackNavigator<RootStackParamList>()
+const Drawer = createDrawerNavigator()
 
-function CustomDrawerContent(props) {
+function CustomDrawerContent(props: DrawerContentComponentProps) {
   return (
     <DrawerContentScrollView {...props}>
       {/*<DrawerItemList {...props} />*/}
       <Image
         source={require('../../node_modules/react-native/Libraries/NewAppScreen/components/logo.png')}
-        style={{height: 100, width: 100}}
+        style={styles.logo}
       />
       <Text>RN performance</Text>
       <DrawerItem
@@ -56,10 +54,15 @@ function CustomDrawerContent(props) {
   )
 }
 
-const MovieStackNavigator = ({navigation, style}) => {
+type MainStackNavigatorProps = {
+  navigation: DrawerNavigationProp<RootStackParamList>
+  style: {}
+}
+
+const MainStackNavigator = ({navigation, style}: MainStackNavigatorProps) => {
   return (
     <Animated.View style={[styles.stack, style]}>
-      <MovieStack.Navigator
+      <MainStack.Navigator
         screenOptions={{
           headerTransparent: true,
           headerStyle: {backgroundColor: 'transparent'},
@@ -73,15 +76,23 @@ const MovieStackNavigator = ({navigation, style}) => {
               style={{marginLeft: Theme.sizeM, marginTop: Theme.sizeS}}
             />
           ),
+          headerBackground: () => (
+            <LinearGradient
+              colors={['transparent', 'rgba(0,0,0,0.7)', 'black']}
+              style={styles.headerBackground}
+              start={{x: 0, y: 1}}
+              end={{x: 0, y: 0}}
+            />
+          ),
+          headerTitleStyle: {color: '#fff'},
         }}>
-        <MovieStack.Screen name="Home" component={HomeScreen} />
-
-        <MovieStack.Screen
+        <MainStack.Screen name="Home" component={HomeScreen} />
+        <MainStack.Screen
           name="MovieList"
           component={MovieListScreen}
           options={{title: Strings.movieListScreen}}
         />
-        <MovieStack.Screen
+        <MainStack.Screen
           name="MovieDetails"
           component={MovieDetailsScreen}
           options={{
@@ -98,7 +109,7 @@ const MovieStackNavigator = ({navigation, style}) => {
             ),
           }}
         />
-      </MovieStack.Navigator>
+      </MainStack.Navigator>
     </Animated.View>
   )
 }
@@ -113,19 +124,19 @@ const RootStackNavigator = () => {
     inputRange: [0, 1],
     outputRange: [0, 16],
   })
-
   const animatedStyle = {borderRadius, transform: [{scale}]}
 
   return (
     <NavigationContainer>
       <LinearGradient
         colors={['#4c669f', '#3b5998', '#192f6a']}
-        style={{flex: 1}}>
+        style={styles.mainContainer}>
         <Drawer.Navigator
           drawerType="slide"
           overlayColor="transparent"
           drawerStyle={styles.drawerStyles}
           drawerContent={(props) => {
+            // @ts-ignore
             setProgress(props.progress)
             return <CustomDrawerContent {...props} />
           }}
@@ -134,22 +145,24 @@ const RootStackNavigator = () => {
             activeTintColor: 'white',
             inactiveTintColor: 'white',
           }}
-          sceneContainerStyle={{backgroundColor: 'transparent'}}>
+          sceneContainerStyle={styles.sceneContainerStyle}>
           <Drawer.Screen name="MovieStack">
-            {(props) => (
-              <MovieStackNavigator {...props} style={animatedStyle} />
-            )}
+            {(props) => <MainStackNavigator {...props} style={animatedStyle} />}
           </Drawer.Screen>
         </Drawer.Navigator>
       </LinearGradient>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
     </NavigationContainer>
   )
 }
 
 const styles = StyleSheet.create({
+  mainContainer: {flex: 1},
   stack: {flex: 1, overflow: 'hidden'},
   drawerStyles: {flex: 1, width: '50%', backgroundColor: 'transparent'},
+  sceneContainerStyle: {backgroundColor: 'transparent'},
+  headerBackground: {flex: 1},
+  logo: {height: 100, width: 100},
 })
 
 export default RootStackNavigator
