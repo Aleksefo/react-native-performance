@@ -42,6 +42,7 @@ const MovieListScreen = () => {
           numColumns={2}
           style={styles.listContainer}
           renderItem={({item}) => <GridListItem movieDataItem={item} />}
+          showsVerticalScrollIndicator={false}
         />
       )}
     </View>
