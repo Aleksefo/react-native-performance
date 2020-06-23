@@ -5,6 +5,7 @@ import {
   StatusBar,
   StyleSheet,
   TouchableOpacity,
+  View,
 } from 'react-native'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
@@ -16,6 +17,7 @@ import {
   DrawerContentComponentProps,
 } from '@react-navigation/drawer'
 import Animated from 'react-native-reanimated'
+import Spacing from '../components/Spacing'
 import HomeScreen from '../screens/HomeScreen'
 import MovieListScreen, {IMovieData} from '../screens/MovieListScreen'
 import MovieDetailsScreen from '../screens/MovieDetailsScreen'
@@ -34,27 +36,42 @@ const Drawer = createDrawerNavigator()
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
   return (
-    <DrawerContentScrollView {...props}>
-      {/*<DrawerItemList {...props} />*/}
-      <Image
-        source={require('../../node_modules/react-native/Libraries/NewAppScreen/components/logo.png')}
-        style={styles.logo}
-      />
-      <Text>RN performance</Text>
+    <DrawerContentScrollView
+      {...props}
+      scrollEnabled={false}
+      contentContainerStyle={styles.contentContainer}>
+      <Spacing size="xl" />
+      <View style={{marginLeft: Theme.sizeM}}>
+        <Image
+          source={require('../../node_modules/react-native/Libraries/NewAppScreen/components/logo.png')}
+          style={styles.logo}
+        />
+        <Text style={styles.appName}>{Strings.appName}</Text>
+      </View>
+      <Spacing size="xl" />
+      <View style={styles.drawerItemList}>
+        <DrawerItem
+          label={Strings.homeScreen}
+          labelStyle={styles.drawerLabel}
+          onPress={() => props.navigation.navigate('Home')}
+          icon={() => <Icon name="md-home" size={24} color="white" />}
+        />
+        <DrawerItem
+          label={Strings.movieListScreen}
+          labelStyle={styles.drawerLabel}
+          onPress={() => props.navigation.navigate('MovieList')}
+          icon={() => <Icon name="ios-film" size={24} color="white" />}
+        />
+      </View>
       <DrawerItem
-        label="Home"
-        // labelStyle={{marginLeft: -16}}
-        onPress={() => props.navigation.navigate('Home')}
-        // icon={}
+        label={Strings.aboutScreen}
+        labelStyle={styles.drawerLabel}
+        onPress={() => props.navigation.navigate('About')}
+        icon={() => (
+          <Icon name="md-help-circle-outline" size={24} color="white" />
+        )}
       />
-      <DrawerItem
-        label="MovieList"
-        onPress={() => props.navigation.navigate('MovieList')}
-      />
-      <DrawerItem
-        label="MovieDetails"
-        onPress={() => props.navigation.navigate('MovieDetails')}
-      />
+      <Spacing size="l" />
     </DrawerContentScrollView>
   )
 }
@@ -70,31 +87,31 @@ const MainStackNavigator = ({navigation, style}: MainStackNavigatorProps) => {
       <MainStack.Navigator
         screenOptions={{
           headerTransparent: true,
-          headerStyle: {backgroundColor: 'transparent', height: 100},
+          headerStyle: {backgroundColor: Colors.transparent, height: 100},
           // headerTitle: null,
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => navigation.toggleDrawer()}
               hitSlop={Theme.hitSlop}
               style={styles.iconContainer}>
-              <Icon name="md-menu" size={30} color="white" />
+              <Icon name="md-menu" size={30} color={Colors.white} />
             </TouchableOpacity>
           ),
           headerBackground: () => (
             <LinearGradient
-              colors={['transparent', 'black', 'black']}
+              colors={[Colors.transparent, Colors.black, Colors.black]}
               style={styles.headerBackground}
               start={{x: 0, y: 1}}
               end={{x: 0, y: 0}}
             />
           ),
-          headerTitleStyle: {
-            color: '#fff',
-            marginTop: Theme.sizeS,
-            ...Theme.fonts.bodyLarge,
-          },
+          headerTitleStyle: styles.headerTitle,
         }}>
-        <MainStack.Screen name="Home" component={HomeScreen} />
+        <MainStack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: Strings.homeScreen.toUpperCase()}}
+        />
         <MainStack.Screen
           name="MovieList"
           component={MovieListScreen}
@@ -111,7 +128,7 @@ const MainStackNavigator = ({navigation, style}: MainStackNavigatorProps) => {
                 onPress={() => navigation.goBack()}
                 hitSlop={Theme.hitSlop}
                 style={styles.iconContainer}>
-                <Icon name="md-arrow-back" size={30} color="white" />
+                <Icon name="md-arrow-back" size={30} color={Colors.white} />
               </TouchableOpacity>
             ),
           }}
@@ -136,11 +153,12 @@ const RootStackNavigator = () => {
   return (
     <NavigationContainer>
       <LinearGradient
+        //todo set proper colors
         colors={['#4c669f', '#3b5998', '#192f6a']}
         style={styles.mainContainer}>
         <Drawer.Navigator
           drawerType="slide"
-          overlayColor="transparent"
+          overlayColor={Colors.transparent}
           drawerStyle={styles.drawerStyles}
           drawerContent={(props) => {
             // @ts-ignore
@@ -148,12 +166,12 @@ const RootStackNavigator = () => {
             return <CustomDrawerContent {...props} />
           }}
           drawerContentOptions={{
-            activeBackgroundColor: 'transparent',
-            activeTintColor: 'white',
-            inactiveTintColor: 'white',
+            activeBackgroundColor: Colors.transparent,
+            activeTintColor: Colors.white,
+            inactiveTintColor: Colors.white,
           }}
           sceneContainerStyle={styles.sceneContainerStyle}>
-          <Drawer.Screen name="MovieStack">
+          <Drawer.Screen name="MainStack">
             {(props) => <MainStackNavigator {...props} style={animatedStyle} />}
           </Drawer.Screen>
         </Drawer.Navigator>
@@ -165,12 +183,28 @@ const RootStackNavigator = () => {
 
 const styles = StyleSheet.create({
   mainContainer: {flex: 1},
+  headerTitle: {
+    color: Colors.white,
+    marginTop: Theme.sizeS,
+    ...Theme.fonts.bodyLarge,
+  },
   stack: {flex: 1, overflow: 'hidden'},
   drawerStyles: {flex: 1, width: '50%', backgroundColor: Colors.transparent},
   sceneContainerStyle: {backgroundColor: Colors.transparent},
   headerBackground: {flex: 1},
-  logo: {height: 100, width: 100},
+  logo: {height: 50, width: 50},
   iconContainer: {marginLeft: Theme.sizeM, marginTop: Theme.sizeS},
+  drawerLabel: {
+    color: Colors.white,
+    ...Theme.fonts.body,
+    marginLeft: -Theme.sizeM,
+  },
+  appName: {
+    color: Colors.white,
+    ...Theme.fonts.bodySmall,
+  },
+  drawerItemList: {flex: 1},
+  contentContainer: {flex: 1},
 })
 
 export default RootStackNavigator

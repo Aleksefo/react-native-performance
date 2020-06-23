@@ -1,4 +1,6 @@
 export default {
+  appName: 'React Native Performance',
+  homeScreen: 'Home',
   // Movie List Screen
   movieListScreen: 'Movies list',
   movieDetailsScreen: 'Movie details',
@@ -7,4 +9,5 @@ export default {
   score: 'Score: ',
   overview: 'Overview:',
   trailers: 'Trailers:',
+  aboutScreen: 'About',
 }
