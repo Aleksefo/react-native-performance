@@ -30,7 +30,9 @@ const MovieDetailsScreen = ({route}: Props) => {
         // defaultSource={IMAGES.default}
         style={styles.backdrop}>
         <View style={styles.backgroundContainer}>
-          <Text style={styles.title}>{movieDataItem.title}</Text>
+          <Text style={styles.title} numberOfLines={2}>
+            {movieDataItem.title}
+          </Text>
         </View>
       </ImageBackground>
       <View style={styles.container}>
